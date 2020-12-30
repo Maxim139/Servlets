@@ -12,5 +12,28 @@
         <url-pattern>/info</url-pattern>
     </servlet-mapping>
 
-
+    <servlet>
+        <display-name>Init</display-name>
+        <servlet-name>Init</servlet-name>
+        <init-param>
+            <param-name>name</param-name>
+            <param-value>Maxim</param-value>
+        </init-param>
+        <init-param>
+            <param-name>age</param-name>
+            <param-value>22</param-value>
+        </init-param>
+        <init-param>
+            <param-name>login</param-name>
+            <param-value>koreshkov</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>maxim</param-value>
+        </init-param>
+        <init-param>
+            <param-name>role</param-name>
+            <param-value>admin</param-value>
+        </init-param>
+    </servlet>
 </web-app>
