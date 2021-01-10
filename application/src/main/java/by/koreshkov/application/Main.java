@@ -1,39 +1,104 @@
 package by.koreshkov.application;
 
+import by.koreshkov.Person;
 import by.koreshkov.Student;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/employees")
-public class Main extends HttpServlet {
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        List<Student> students;
-      //  String first_name = req.getParameter("First Name");
-     //   int age = Integer.parseInt(req.getParameter("Age"));
-      //  int salary = Integer.parseInt(req.getParameter("Salary"));
-     //   Student student1 = new Student(req.getParameter("First Name"), Integer.parseInt(req.getParameter("Age")),Integer.parseInt(req.getParameter("Salary")));
-        //Student student1 = new Student(first_name, age, salary);
-        //students.add(
-                //new Student(req.getParameter("First Name"),Integer.parseInt(req.getParameter("Age")), Integer.parseInt(req.getParameter("Salary"))));
-        HttpSession session = req.getSession();
-      //  session.setAttribute("empl1", student1);
-
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/info");
-        requestDispatcher.forward(req, resp);
+public class Main {
+    static List<Person> employees = new ArrayList<>();
+    static List<Student> subjects = new ArrayList<>();
+    public static void main(String[] args) {
+        String url = "jdbc:postgresql://localhost:5432/Employees";
+        String user = "postgres";
+        String password = "koreshkov";
 
 
 
+        String get_employees = "select id, name, age, login, password, role from employees";
+        String get_subjects = "select id_student, subject, mark from subjects";
+
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(get_employees);
+
+            while(rs.next())
+            {
+                Person person = new Person();
+                person.setAge(rs.getInt("age"));
+                person.setLogin(rs.getString("login"));
+                person.setName(rs.getString("name"));
+                person.setRole(rs.getString("role"));
+                person.setPassword(rs.getString("password"));
+                employees.add(person);
+
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+
+        }
+
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(get_subjects);
+
+            while(rs.next())
+            {
+                Student student = new Student();
+                student.setId(rs.getInt("id_student"));
+                student.setSubject(rs.getString("subject"));
+                student.setMark(rs.getInt("mark"));
+                subjects.add(student);
+
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+
+        }
+      /*  for(Person list: employees){
+            System.out.println(list);
+        }*/
 
 
     }
+
+    public static boolean checkUser(String login, String password) {
+        boolean reply = false;
+        for (Person user : employees) {
+            String userLogin = user.getLogin();
+            String userPassword = user.getPassword();
+            if (login.equals(userLogin) && password.equals(userPassword)) {
+                reply = true;
+                break;
+            }
+        }
+        return reply;
+
+    }
+
+    public static Person user (String login){
+        Person user_temp = null;
+        //String userRole="undefined";
+        for (Person user : employees){
+            String userLogin = user.getLogin();
+            if (login.equals(userLogin)){
+                user_temp = user;
+              // userRole = user.getRole();
+               break;
+            }
+        }
+        return user_temp;
+        //return userRole;
+    }
+
+    public static List<Student> subjectList(){
+        return subjects;
+    }
+
+
 }
+

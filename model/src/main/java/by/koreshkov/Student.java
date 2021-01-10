@@ -1,50 +1,49 @@
 package by.koreshkov;
 
 import java.util.Map;
+import java.util.Objects;
 
-public class Student {
-String name;
-int age, groupId;
-private String login, password, role;
-Map<String, Integer> SubjectAndMark;
+public class Student extends Person{
 
-    public Student(String name, int age, int groupId, String login) {
-        this.name = name;
-        this.age = age;
-        this.groupId = groupId;
-        this.login = login;
+private String subject;
+private int mark;
+
+    public String getSubject() {
+        return subject;
     }
 
-    public String getLogin() {
-        return login;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public int getMark() {
+        return mark;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setMark(int mark) {
+        this.mark = mark;
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", groupId=" + groupId +
+                "subject='" + subject + '\'' +
+                ", mark=" + mark +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Student student = (Student) o;
+        return mark == student.mark &&
+                Objects.equals(subject, student.subject);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), subject, mark);
     }
 }

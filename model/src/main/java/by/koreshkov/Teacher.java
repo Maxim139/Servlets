@@ -3,16 +3,13 @@ package by.koreshkov;
 public class Teacher {
 
     String name;
-    int age, groupId, janSalary, febSalary, marSalary, aprSalary;
+    int age, groupId;
     private String login, password, role;
 
-    public Teacher(String name, int age, int janSalary, int febSalary, int marSalary, int aprSalary, int groupId) {
+    public Teacher(String name, int age,int groupId) {
         this.name = name;
         this.age = age;
-        this.janSalary = janSalary;
-        this.febSalary = febSalary;
-        this.marSalary = marSalary;
-        this.aprSalary = aprSalary;
+
         this.groupId = groupId;
     }
 
@@ -46,10 +43,7 @@ public class Teacher {
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", groupId=" + groupId +
-                ", janSalary=" + janSalary +
-                ", febSalary=" + febSalary +
-                ", marSalary=" + marSalary +
-                ", aprSalary=" + aprSalary +
+
                 '}';
     }
 }
