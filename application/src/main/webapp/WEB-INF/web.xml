@@ -12,5 +12,58 @@
         <url-pattern>/info</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>adminStartPage</servlet-name>
+        <jsp-file>/adminStartPage.jsp</jsp-file>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>adminStartPage</servlet-name>
+        <url-pattern>/adminStartPage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>teacherStartPage</servlet-name>
+        <jsp-file>/teacherStartPage.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>teacherStartPage</servlet-name>
+        <url-pattern>/teacherStartPage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>studentStartPage</servlet-name>
+        <jsp-file>/studentStartPage.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>studentStartPage</servlet-name>
+        <url-pattern>/studentStartPage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <display-name>Init</display-name>
+        <servlet-name>Init</servlet-name>
+        <init-param>
+            <param-name>name</param-name>
+            <param-value>Maxim</param-value>
+        </init-param>
+        <init-param>
+            <param-name>age</param-name>
+            <param-value>22</param-value>
+        </init-param>
+        <init-param>
+            <param-name>login</param-name>
+            <param-value>koreshkov</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>maxim</param-value>
+        </init-param>
+        <init-param>
+            <param-name>role</param-name>
+            <param-value>admin</param-value>
+        </init-param>
+    </servlet>
 </web-app>
