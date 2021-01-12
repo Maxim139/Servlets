@@ -2,7 +2,9 @@ package by.koreshkov.application;
 
 import by.koreshkov.Person;
 import by.koreshkov.Student;
+import by.koreshkov.Teacher;
 
+import javax.servlet.http.HttpSession;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
 public class Main {
     static List<Person> employees = new ArrayList<>();
     static List<Student> subjects = new ArrayList<>();
+    static List<Teacher> salary = new ArrayList<>();
     public static void main(String[] args) {
         String url = "jdbc:postgresql://localhost:5432/Employees";
         String user = "postgres";
@@ -19,6 +22,7 @@ public class Main {
 
         String get_employees = "select id, name, age, login, password, role from employees";
         String get_subjects = "select id_student, subject, mark from subjects";
+        String get_salary = "select id_teacher, month, salary from salary";
 
         try {
             Connection connection = DriverManager.getConnection(url, user, password);
@@ -59,9 +63,29 @@ public class Main {
             e.printStackTrace();
 
         }
-      /*  for(Person list: employees){
+
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(get_salary);
+
+            while(rs.next())
+            {
+                Teacher teacher = new Teacher();
+                teacher.setId(rs.getInt("id_teacher"));
+                teacher.setMonth(rs.getString("month"));
+                teacher.setSalary(rs.getInt("salary"));
+                salary.add(teacher);
+
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+
+        }
+
+       for(Person list: employees){
             System.out.println(list);
-        }*/
+        }
 
 
     }
@@ -97,6 +121,10 @@ public class Main {
 
     public static List<Student> subjectList(){
         return subjects;
+    }
+
+    public static List<Teacher> salaryList(){
+        return salary;
     }
 
 

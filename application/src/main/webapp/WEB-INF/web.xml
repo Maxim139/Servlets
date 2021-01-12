@@ -33,6 +33,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>salary</servlet-name>
+        <jsp-file>/salary.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>salary</servlet-name>
+        <url-pattern>/salary</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>studentStartPage</servlet-name>
         <jsp-file>/studentStartPage.jsp</jsp-file>
     </servlet>
@@ -43,8 +53,8 @@
     </servlet-mapping>
 
     <servlet>
-        <display-name>Init</display-name>
-        <servlet-name>Init</servlet-name>
+        <servlet-name>Authorization</servlet-name>
+        <servlet-class>Authorization</servlet-class>
         <init-param>
             <param-name>name</param-name>
             <param-value>Maxim</param-value>
@@ -55,15 +65,11 @@
         </init-param>
         <init-param>
             <param-name>login</param-name>
-            <param-value>koreshkov</param-value>
-        </init-param>
-        <init-param>
-            <param-name>password</param-name>
             <param-value>maxim</param-value>
         </init-param>
         <init-param>
-            <param-name>role</param-name>
-            <param-value>admin</param-value>
+            <param-name>password</param-name>
+            <param-value>koreshkov</param-value>
         </init-param>
     </servlet>
 </web-app>

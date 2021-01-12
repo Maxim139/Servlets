@@ -24,24 +24,33 @@ public class Authorization extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        if (Main.checkUser(login, password)) {
+        String adminLogin = getServletConfig().getInitParameter("login");
+        String adminPassword = getServletConfig().getInitParameter("password");
+        boolean admin = adminLogin.equals(login) && adminPassword.equals(password);
+        if (Main.checkUser(login, password) || admin) {
             //String role = Main.role(login);
             Person user = Main.user(login);
             String role = user.getRole();
-            if (role.equals("admin"))
+            if (admin)
             {
+                HttpSession session = req.getSession();
+                session.setAttribute("user", user);
                 ServletContext context = req.getServletContext();
                 RequestDispatcher dispatcher = context.getRequestDispatcher("/adminStartPage");
                 dispatcher.forward(req, resp);
             }
             if (role.equals("teacher"))
             {
+                HttpSession session = req.getSession();
+                session.setAttribute("user", user);
                 ServletContext context = req.getServletContext();
                 RequestDispatcher dispatcher = context.getRequestDispatcher("/teacherStartPage");
                 dispatcher.forward(req, resp);
             }
             if (role.equals("student"))
             {
+                HttpSession session = req.getSession();
+                session.setAttribute("user", user);
                 List<Student> sub_marks = new ArrayList<>();
                 List<Student> list = Main.subjectList();
                 for(Student student: list) {
@@ -52,7 +61,7 @@ public class Authorization extends HttpServlet {
                         sub_marks.add(student_temp);
                     }
                 }
-                HttpSession session = req.getSession();
+              //  HttpSession session = req.getSession();
                 session.setAttribute("marks", sub_marks);
                 ServletContext context = req.getServletContext();
                 RequestDispatcher dispatcher = context.getRequestDispatcher("/studentStartPage");
