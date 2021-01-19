@@ -10,7 +10,7 @@
     <input type="submit">
 </form>
 
-<form action="" method="get">
+<form action="salary" method="get">
     Зарплата:
     <input type="submit">
 </form>

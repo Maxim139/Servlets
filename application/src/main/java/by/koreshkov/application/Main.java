@@ -4,7 +4,7 @@ import by.koreshkov.Person;
 import by.koreshkov.Student;
 import by.koreshkov.Teacher;
 
-import javax.servlet.http.HttpSession;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Main {
     static List<Person> employees = new ArrayList<>();
     static List<Student> subjects = new ArrayList<>();
     static List<Teacher> salary = new ArrayList<>();
-    public static void main(String[] args) {
+    public static void bd(){
         String url = "jdbc:postgresql://localhost:5432/Employees";
         String user = "postgres";
         String password = "koreshkov";
@@ -83,10 +83,10 @@ public class Main {
 
         }
 
-       for(Person list: employees){
+       /*for(Person list: employees){
             System.out.println(list);
         }
-
+*/
 
     }
 

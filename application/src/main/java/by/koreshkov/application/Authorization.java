@@ -22,6 +22,7 @@ public class Authorization extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Main.bd();
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String adminLogin = getServletConfig().getInitParameter("login");
@@ -61,7 +62,6 @@ public class Authorization extends HttpServlet {
                         sub_marks.add(student_temp);
                     }
                 }
-              //  HttpSession session = req.getSession();
                 session.setAttribute("marks", sub_marks);
                 ServletContext context = req.getServletContext();
                 RequestDispatcher dispatcher = context.getRequestDispatcher("/studentStartPage");
