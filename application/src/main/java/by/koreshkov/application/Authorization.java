@@ -19,8 +19,8 @@ import java.util.List;
 
 
 @WebServlet(urlPatterns = "/authorization", initParams = {
-        @WebInitParam(name = "login1", value = "maxim"),
-        @WebInitParam(name = "password1", value = "koreshkov")
+        @WebInitParam(name = "login", value = "maxim"),
+        @WebInitParam(name = "password", value = "koreshkov")
 })
 public class Authorization extends HttpServlet {
 
@@ -29,8 +29,8 @@ public class Authorization extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException  {
          super.init(config);
-         adminLogin = getServletConfig().getInitParameter("login1");
-         adminPassword = getServletConfig().getInitParameter("password1");
+         adminLogin = getServletConfig().getInitParameter("login");
+         adminPassword = getServletConfig().getInitParameter("password");
          // ServletContext context = getServletContext();
          // adminLogin = context.getInitParameter("login");
          // adminPassword = context.getInitParameter("password");
