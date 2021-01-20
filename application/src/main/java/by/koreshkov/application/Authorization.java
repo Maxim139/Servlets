@@ -40,11 +40,12 @@ public class Authorization extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
+        String role = "";
         // String adminLogin = getServletConfig().getInitParameter("login");
         // String adminPassword = getServletConfig().getInitParameter("password");
         boolean admin = adminLogin.equals(login) && adminPassword.equals(password);
         if (Main.checkUser(login, password) || admin) {
-            String role = Main.user(login).getRole();
+            if (!admin) { role = Main.user(login).getRole(); }
             if (admin) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", Main.user(login));
