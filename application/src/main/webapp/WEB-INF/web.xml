@@ -2,15 +2,7 @@
 <web-app version="2.4"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-<servlet>
-<servlet-name>Info</servlet-name>
-    <jsp-file>/Info.jsp</jsp-file>
-</servlet>
 
-    <servlet-mapping>
-        <servlet-name>Info</servlet-name>
-        <url-pattern>/info</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>adminStartPage</servlet-name>
@@ -39,7 +31,7 @@
 
     <servlet-mapping>
         <servlet-name>salary</servlet-name>
-        <url-pattern>/salary</url-pattern>
+        <url-pattern>/salaryjsp</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -52,6 +44,19 @@
         <url-pattern>/studentStartPage</url-pattern>
     </servlet-mapping>
 
+    <!--
+    <context-param>
+        <init-param>
+            <param-name>login</param-name>
+            <param-value>maxim</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>koreshkov</param-value>
+        </init-param>
+    </context-param>
+-->
+<!--
     <servlet>
         <servlet-name>Authorization</servlet-name>
         <servlet-class>Authorization</servlet-class>
@@ -72,4 +77,6 @@
             <param-value>koreshkov</param-value>
         </init-param>
     </servlet>
+-->
+
 </web-app>

@@ -34,11 +34,9 @@ public class MonthAndSalary extends HttpServlet {
                 monthSalary.add(teacher_temp);
             }
         }
-        //HttpSession session = req.getSession();
         session.setAttribute("salary", monthSalary);
         ServletContext context = req.getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/salary");
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/salaryjsp");
         dispatcher.forward(req, resp);
-
     }
 }
