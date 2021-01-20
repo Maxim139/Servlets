@@ -38,38 +38,10 @@ public class Main {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-
         }
         return employees;
     }
 
-    public static boolean checkUser(String login, String password) {
-        boolean reply = false;
-        List<Person> employeesList = employeesList();
-        for (Person user : employeesList) {
-            String userLogin = user.getLogin();
-            String userPassword = user.getPassword();
-            if (login.equals(userLogin) && password.equals(userPassword)) {
-                reply = true;
-                break;
-            }
-        }
-        return reply;
-
-    }
-
-    public static Person user (String login) {
-        Person user_temp = null;
-        List<Person> employeesList = employeesList();
-        for (Person user : employeesList) {
-            String userLogin = user.getLogin();
-            if (login.equals(userLogin)) {
-                user_temp = user;
-                break;
-            }
-        }
-        return user_temp;
-    }
 
     public static List<Student> subjectList() {
 
@@ -96,8 +68,9 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    return subjects;
+        return subjects;
     }
+
 
     public static List<Teacher> salaryList() {
 
@@ -124,7 +97,36 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    return salary;
+        return salary;
+    }
+
+
+    public static boolean checkUser(String login, String password) {
+        boolean reply = false;
+        List<Person> employeesList = employeesList();
+        for (Person user : employeesList) {
+            String userLogin = user.getLogin();
+            String userPassword = user.getPassword();
+            if (login.equals(userLogin) && password.equals(userPassword)) {
+                reply = true;
+                break;
+            }
+        }
+        return reply;
+    }
+
+
+    public static Person user (String login) {
+        Person user_temp = null;
+        List<Person> employeesList = employeesList();
+        for (Person user : employeesList) {
+            String userLogin = user.getLogin();
+            if (login.equals(userLogin)) {
+                user_temp = user;
+                break;
+            }
+        }
+        return user_temp;
     }
 }
 
