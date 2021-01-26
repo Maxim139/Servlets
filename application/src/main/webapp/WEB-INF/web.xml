@@ -44,6 +44,36 @@
         <url-pattern>/studentStartPage</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>insertPerson</servlet-name>
+        <jsp-file>/insertPerson.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>insertPerson</servlet-name>
+        <url-pattern>/insertPerson</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>insertSubjAndMarks</servlet-name>
+        <jsp-file>/insertSubjAndMarks.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>insertSubjAndMarks</servlet-name>
+        <url-pattern>/insertSubjAndMarksJSP</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>insertSalary</servlet-name>
+        <jsp-file>/insertSalary.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>insertSalary</servlet-name>
+        <url-pattern>/insertSalaryJSP</url-pattern>
+    </servlet-mapping>
+
     <!--
     <context-param>
         <init-param>
