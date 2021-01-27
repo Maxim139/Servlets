@@ -5,6 +5,7 @@ import by.koreshkov.Student;
 import by.koreshkov.Teacher;
 
 
+import javax.servlet.http.HttpSession;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
 public class Main {
 
     public static List<Person> employeesList() {
+
+
 
         List<Person> employees = new ArrayList<>();
 
@@ -28,6 +31,7 @@ public class Main {
 
             while (rs.next()) {
                 Person person = new Person();
+                person.setId(rs.getInt("id"));
                 person.setAge(rs.getInt("age"));
                 person.setLogin(rs.getString("login"));
                 person.setName(rs.getString("name"));
@@ -39,6 +43,8 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        //System.out.println(employees);
         return employees;
     }
 
@@ -128,5 +134,7 @@ public class Main {
         }
         return user_temp;
     }
+
+
 }
 

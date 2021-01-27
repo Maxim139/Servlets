@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; UTF-8" language="java"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java"%>
 
 <html>
 <head>
@@ -9,6 +9,12 @@
     Работать с персоналом:
     <input type="submit">
 </form>
+
+
+<c:forEach var="person" items="${empList}" >
+        <p>${person}</p>
+    </c:forEach>
+
 
 
 </body>

@@ -39,4 +39,6 @@ public class MonthAndSalary extends HttpServlet {
         RequestDispatcher dispatcher = context.getRequestDispatcher("/salaryjsp");
         dispatcher.forward(req, resp);
     }
+
+
 }

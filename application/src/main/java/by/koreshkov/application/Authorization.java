@@ -1,6 +1,7 @@
 package by.koreshkov.application;
 
 
+import by.koreshkov.Person;
 import by.koreshkov.Student;
 
 import javax.servlet.RequestDispatcher;
@@ -44,16 +45,24 @@ public class Authorization extends HttpServlet {
         // String adminLogin = getServletConfig().getInitParameter("login");
         // String adminPassword = getServletConfig().getInitParameter("password");
         boolean admin = adminLogin.equals(login) && adminPassword.equals(password);
-        if (Main.checkUser(login, password) || admin) {
-            if (!admin) { role = Main.user(login).getRole(); }
-            if (admin) {
+      //  if (Main.checkUser(login, password) || admin) {
+        //    if (!admin) { role = Main.user(login).getRole(); }
+          //  if (admin) {
+
                 HttpSession session = req.getSession();
-                session.setAttribute("user", Main.user(login));
+                List<Person> list = new ArrayList<>();
+
+                Person person = new Person();
+                person.setId(35);
+                list.add(person);
+                int[] a = {1,2,3,4,5};
+                req.setAttribute("empList", a); //--
+                //session.setAttribute("user", Main.user(login));
                 ServletContext context = req.getServletContext();
                 RequestDispatcher dispatcher = context.getRequestDispatcher("/adminStartPage");
                 dispatcher.forward(req, resp);
-            }
-            if (role.equals("teacher")) {
+           // }
+            /* if (role.equals("teacher")) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", Main.user(login));
                 ServletContext context = req.getServletContext();
@@ -79,5 +88,9 @@ public class Authorization extends HttpServlet {
                 dispatcher.forward(req, resp);
             }
         }
+
+             */
     }
+
+
 }
