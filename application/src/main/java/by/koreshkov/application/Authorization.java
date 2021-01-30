@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,13 +51,50 @@ public class Authorization extends HttpServlet {
           //  if (admin) {
 
                 HttpSession session = req.getSession();
+/*
                 List<Person> list = new ArrayList<>();
-
                 Person person = new Person();
-                person.setId(35);
+                person.setId(33);
+                Person person1 = new Person();
+                person1.setId(22);
                 list.add(person);
-                int[] a = {1,2,3,4,5};
-                req.setAttribute("empList", a); //--
+                list.add(person1);
+
+
+ */
+        List<Person> employees = new ArrayList<>();
+
+        String url = "jdbc:postgresql://localhost:5432/Employees";
+        String user = "postgres";
+        String pass = "koreshkov";
+
+        String get_employees = "select id, name, age, login, password, role from employees";
+
+        try {
+            Connection connection = DriverManager.getConnection(url, user, pass);
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(get_employees);
+
+            while (rs.next()) {
+                Person person = new Person();
+                person.setId(rs.getInt("id"));
+                person.setAge(rs.getInt("age"));
+                person.setLogin(rs.getString("login"));
+                person.setName(rs.getString("name"));
+                person.setRole(rs.getString("role"));
+                person.setPassword(rs.getString("password"));
+                employees.add(person);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        //System.out.println(employees);
+
+
+              //  List<Student> list = Main.subjectList();
+                session.setAttribute("empl", employees ); //--
                 //session.setAttribute("user", Main.user(login));
                 ServletContext context = req.getServletContext();
                 RequestDispatcher dispatcher = context.getRequestDispatcher("/adminStartPage");

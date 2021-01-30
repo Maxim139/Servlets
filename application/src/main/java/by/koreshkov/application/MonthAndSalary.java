@@ -20,6 +20,7 @@ import java.util.List;
 @WebServlet("/salary")
 public class MonthAndSalary extends HttpServlet {
 
+    /*
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Teacher> monthSalary = new ArrayList<>();
@@ -40,5 +41,7 @@ public class MonthAndSalary extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 
+
+     */
 
 }

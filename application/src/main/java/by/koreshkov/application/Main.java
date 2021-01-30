@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-
+/*
     public static List<Person> employeesList() {
 
 
@@ -48,7 +48,7 @@ public class Main {
         return employees;
     }
 
-
+/*
     public static List<Student> subjectList() {
 
         List<Student> subjects = new ArrayList<>();
@@ -77,7 +77,7 @@ public class Main {
         return subjects;
     }
 
-
+/*
     public static List<Teacher> salaryList() {
 
         List<Teacher> salary = new ArrayList<>();
@@ -135,6 +135,8 @@ public class Main {
         return user_temp;
     }
 
+
+ */
 
 }
 

@@ -5,15 +5,10 @@
 <title>Employees</title>
 </head>
 <body>
-<form action="" method="get">
-    Работать с персоналом:
-    <input type="submit">
-</form>
 
 
-<c:forEach var="person" items="${empList}" >
-        <p>${person}</p>
-    </c:forEach>
+
+<%= session.getAttribute("empl") %>
 
 
 
