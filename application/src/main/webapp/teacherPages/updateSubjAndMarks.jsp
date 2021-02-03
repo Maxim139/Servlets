@@ -7,10 +7,10 @@
 </title>
 </head>
 <body>
-<form action="insertSubjAndMarks" method="post">
-    id:<input name="id" type="text">
-    subject:<input name="subject" type="text">
-    mark:<input name="mark" type="text">
+<form action="updateSubjAndMarks" method="put">
+    id: <input name="id" type="text">
+    subject: <input name="subject" type="text">
+    mark: <input name="mark" type="text">
     <input type="submit">
 </form>
 

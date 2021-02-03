@@ -13,36 +13,43 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-@WebServlet("/insertSubjAndMarks")
-public class InsertSubjAndMarks extends HttpServlet {
+@WebServlet("/updateSubjAndMarks")
+public class UpdateSubjAndMarks extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
-        String mark = req.getParameter("mark");
+
+        int id = Integer.parseInt(req.getParameter("id"));
+        int mark = Integer.parseInt(req.getParameter("mark"));
         String subject = req.getParameter("subject");
 
         String url = "jdbc:postgresql://localhost:5432/Employees";
         String user = "postgres";
         String pass = "koreshkov";
 
-        String insert_subjects = "INSERT INTO subjects(id_student, mark, subject) VALUES " +
-                "(" + id + ","
-                + mark + ","
-                + subject + ")";
+        String upMark = "UPDATE subjects SET mark ="+mark+"WHERE subject = "+subject+" AND id="+id;
+        String delete = "DELETE FROM subjects WHERE id="+id+" AND subject="+subject;
 
         try {
             Connection connection = DriverManager.getConnection(url, user, pass);
-            PreparedStatement statement = connection.prepareStatement(insert_subjects);
 
-            statement.executeUpdate();
+            if (id != 0 && subject != null && mark != 0) {
+                PreparedStatement statement = connection.prepareStatement(upMark);
+                statement.executeUpdate();
+            }
+            if (id != 0 && subject != null && mark == 0) {
+                PreparedStatement statement = connection.prepareStatement(delete);
+                statement.executeUpdate();
+            }
 
             ServletContext context = req.getServletContext();
-            RequestDispatcher dispatcher = context.getRequestDispatcher("/insertSubjAndMarksJSP");
+            RequestDispatcher dispatcher = context.getRequestDispatcher("/updateSubjAndMarksJSP");
             dispatcher.forward(req, resp);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
+
 }

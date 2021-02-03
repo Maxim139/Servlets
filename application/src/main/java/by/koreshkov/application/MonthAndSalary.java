@@ -36,7 +36,7 @@ public class MonthAndSalary extends HttpServlet {
         }
         session.setAttribute("salary", monthSalary);
         ServletContext context = req.getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/salaryjsp");
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/salaryJSP");
         dispatcher.forward(req, resp);
     }
 }

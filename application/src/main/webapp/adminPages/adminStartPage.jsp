@@ -5,13 +5,14 @@
 <title>Employees</title>
 </head>
 <body>
+
 <form action="insertPerson" method="get">
     Добавить пользователя:
     <input type="submit">
 </form>
 
-<form action="insertSubjAndMarksJSP" method="get">
-    Добавить предметы и оценки студентам:
+<form action="updatePersonJSP" method="get">
+    Редактировать пользователей:
     <input type="submit">
 </form>
 
@@ -19,5 +20,11 @@
     Добавить зарплаты учителям:
     <input type="submit">
 </form>
+
+<form action="updateSalaryJSP" method="get">
+    Редактировать зарплаты учителей:
+    <input type="submit">
+</form>
+
 </body>
 </html>
