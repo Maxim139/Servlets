@@ -5,6 +5,6 @@
 <title>Employees</title>
 </head>
 <body>
-<%= (List<Teacher>) session.getAttribute("salary") %>
+<%= session.getAttribute("salary") %>
 </body>
 </html>
