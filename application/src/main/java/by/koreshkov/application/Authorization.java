@@ -70,6 +70,15 @@ public class Authorization extends HttpServlet {
 
         String get_employees = "select id, name, age, login, password, role from employees";
 
+
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+
         try {
             Connection connection = DriverManager.getConnection(url, user, pass);
             Statement statement = connection.createStatement();
