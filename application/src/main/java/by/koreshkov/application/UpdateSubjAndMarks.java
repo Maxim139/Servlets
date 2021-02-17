@@ -8,10 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 @WebServlet("/updateSubjAndMarks")
 public class UpdateSubjAndMarks extends HttpServlet {
@@ -19,8 +16,15 @@ public class UpdateSubjAndMarks extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        int id = Integer.parseInt(req.getParameter("id"));
-        int mark = Integer.parseInt(req.getParameter("mark"));
+        int id = 0, mark = 0;
+
+        if(!req.getParameter("id").equals("")) {
+            id = Integer.parseInt(req.getParameter("id"));
+        }
+        if(!req.getParameter("mark").equals("")) {
+            mark = Integer.parseInt(req.getParameter("mark"));
+        }
+
         String subject = req.getParameter("subject");
 
         String url = "jdbc:postgresql://localhost:5432/Employees";
@@ -31,15 +35,21 @@ public class UpdateSubjAndMarks extends HttpServlet {
         String delete = "DELETE FROM subjects WHERE id="+id+" AND subject="+subject;
 
         try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
             Connection connection = DriverManager.getConnection(url, user, pass);
 
-            if (id != 0 && subject != null && mark != 0) {
-                PreparedStatement statement = connection.prepareStatement(upMark);
-                statement.executeUpdate();
+            if (id != 0 && !subject.equals("") && mark != 0) {
+                Statement statement = connection.createStatement();
+                statement.execute(upMark);
             }
-            if (id != 0 && subject != null && mark == 0) {
-                PreparedStatement statement = connection.prepareStatement(delete);
-                statement.executeUpdate();
+            if (id != 0 && !subject.equals("") && mark == 0) {
+                Statement statement = connection.createStatement();
+                statement.execute(delete);
             }
 
             ServletContext context = req.getServletContext();

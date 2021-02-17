@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 @WebServlet("/updatePerson")
 public class UpdatePerson extends HttpServlet {
@@ -20,9 +17,19 @@ public class UpdatePerson extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        int id = Integer.parseInt(req.getParameter("id"));
-        int group = Integer.parseInt(req.getParameter("group"));
-        int age = Integer.parseInt(req.getParameter("age"));
+        int id = 0, group = 0, age = 0;
+
+        if (!req.getParameter("id").equals("")) {
+            id = Integer.parseInt(req.getParameter("id"));
+        }
+        if (!req.getParameter("group").equals("")) {
+            group = Integer.parseInt(req.getParameter("group"));
+        }
+        if (!req.getParameter("age").equals("")) {
+            age = Integer.parseInt(req.getParameter("age"));
+        }
+
+
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
@@ -33,46 +40,49 @@ public class UpdatePerson extends HttpServlet {
         String user = "postgres";
         String pass = "koreshkov";
 
-        String upName = "UPDATE employees SET name="+name+"WHERE id="+id;
-        String upAge = "UPDATE employees SET name="+age+"WHERE id="+id;
-        String upLogin = "UPDATE employees SET name="+login+"WHERE id="+id;
-        String upPassword = "UPDATE employees SET name="+password+"WHERE id="+id;
-        String upRole = "UPDATE employees SET name="+role+"WHERE id="+id;
-        String upGroup = "UPDATE employees SET name="+group+"WHERE id="+id;
-        String delete = "DELETE FROM employees where id="+id;
-
+        String upName = "UPDATE employees SET name='"+name+"' WHERE id="+id;
+        String upAge = "UPDATE employees SET age="+age+" WHERE id="+id;
+        String upLogin = "UPDATE employees SET login='"+login+"' WHERE id="+id;
+        String upPassword = "UPDATE employees SET password='"+password+"' WHERE id="+id;
+        String upRole = "UPDATE employees SET role='"+role+"' WHERE id="+id;
+        String upGroup = "UPDATE employees SET group_number="+group+" WHERE id="+id;
+        String delete = "DELETE FROM employees WHERE id="+id;
 
         try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
+        try {
             Connection connection = DriverManager.getConnection(url, user, pass);
-
-            if (name != null) {
-                PreparedStatement statement = connection.prepareStatement(upName);
-                statement.executeUpdate();
+            if (!name.equals("")) {
+                Statement statement = connection.createStatement();
+                statement.execute(upName);
             }
             if (age != 0) {
-                PreparedStatement statement = connection.prepareStatement(upAge);
-                statement.executeUpdate();
+                Statement statement = connection.createStatement();
+                statement.execute(upAge);
             }
-            if (login != null) {
-                PreparedStatement statement = connection.prepareStatement(upLogin);
-                statement.executeUpdate();
+            if (!login.equals("")) {
+                Statement statement = connection.createStatement();
+                statement.execute(upLogin);
             }
-            if (password != null) {
-                PreparedStatement statement = connection.prepareStatement(upPassword);
-                statement.executeUpdate();
+            if (!password.equals("")) {
+                Statement statement = connection.createStatement();
+                statement.execute(upPassword);
             }
-            if (role != null) {
-                PreparedStatement statement = connection.prepareStatement(upRole);
-                statement.executeUpdate();
+            if (!role.equals("")) {
+                Statement statement = connection.createStatement();
+                statement.execute(upRole);
             }
             if (group != 0) {
-                PreparedStatement statement = connection.prepareStatement(upGroup);
-                statement.executeUpdate();
+                Statement statement = connection.createStatement();
+                statement.execute(upGroup);
             }
-            if (id != 0 && name == null && login == null && password == null && age == 0 && role == null && group == 0) {
-                PreparedStatement statement = connection.prepareStatement(delete);
-                statement.executeUpdate();
+            if (id != 0 && name.equals("") && login.equals("") && password.equals("") && age == 0 && role.equals("") && group == 0) {
+                Statement statement = connection.createStatement();
+                statement.execute(delete);
             }
 
             ServletContext context = req.getServletContext();

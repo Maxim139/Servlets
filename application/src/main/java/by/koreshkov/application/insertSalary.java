@@ -8,10 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 @WebServlet("/insertSalary")
 public class insertSalary extends HttpServlet {
@@ -26,16 +23,22 @@ public class insertSalary extends HttpServlet {
         String user = "postgres";
         String pass = "koreshkov";
 
-        String insert_subjects = "INSERT INTO salary(id_teacher, month, salary) VALUES " +
-                "(" + id + ","
-                + month + ","
-                + salary + ")";
+        String insert_salary = "INSERT INTO salary(id_teacher, month, salary) VALUES " +
+                "(" + Integer.parseInt(id) + ",'"
+                + month + "',"
+                + Integer.parseInt(salary) + ")";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         try {
             Connection connection = DriverManager.getConnection(url, user, pass);
-            PreparedStatement statement = (PreparedStatement) connection.prepareStatement(insert_subjects);
+            Statement statement =  connection.createStatement();
 
-            statement.executeUpdate();
+            statement.execute(insert_salary);
 
             ServletContext context = req.getServletContext();
             RequestDispatcher dispatcher = context.getRequestDispatcher("/insertSalaryJSP");

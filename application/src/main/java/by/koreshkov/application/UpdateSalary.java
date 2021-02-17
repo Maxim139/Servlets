@@ -8,10 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 @WebServlet("/updateSalary")
 public class UpdateSalary extends HttpServlet {
@@ -19,32 +16,44 @@ public class UpdateSalary extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        int id = Integer.parseInt(req.getParameter("id"));
-        int salary = Integer.parseInt(req.getParameter("salary"));
+        int id = 0, salary = 0;
+
+        if (!req.getParameter("id").equals("")) {
+            id = Integer.parseInt(req.getParameter("id"));
+        }
+        if (!req.getParameter("salary").equals("")) {
+            salary = Integer.parseInt(req.getParameter("salary"));
+        }
+
         String month = req.getParameter("month");
 
         String url = "jdbc:postgresql://localhost:5432/Employees";
         String user = "postgres";
         String pass = "koreshkov";
 
-        String upSalary = "UPDATE salary SET salary=" + salary + "WHERE id=" + id;
-        String upMonth = "UPDATE salary SET name=" + month + "WHERE id=" + id;
-        String delete = "DELETE FROM salary WHERE id="+id;
+        String upSalary = "UPDATE salary SET salary=" + salary + "WHERE id_teacher=" +id+" AND month='"+month+"'";
+        String delete = "DELETE FROM salary WHERE id_teacher="+id+"AND month='"+month+"'";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         try {
             Connection connection = DriverManager.getConnection(url, user, pass);
 
-            if (month != null) {
-                PreparedStatement statement = connection.prepareStatement(upMonth);
-                statement.executeUpdate();
+            if (!month.equals("")) {
+                Statement statement = connection.createStatement();
+                statement.execute(upSalary);
             }
             if (salary != 0) {
-                PreparedStatement statement = connection.prepareStatement(upSalary);
-                statement.executeUpdate();
+                Statement statement = connection.createStatement();
+                statement.execute(upSalary);
             }
-            if (id != 0 && month == null && salary == 0) {
-                PreparedStatement statement = connection.prepareStatement(delete);
-                statement.executeUpdate();
+            if (id != 0 && !month.equals("") && salary == 0) {
+                Statement statement = connection.createStatement();
+                statement.execute(delete);
             }
 
             ServletContext context = req.getServletContext();

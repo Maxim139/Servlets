@@ -26,19 +26,25 @@ public class Insert extends HttpServlet {
         String user = "postgres";
         String pass = "koreshkov";
 
-        String insert_employee = "insert into employees(name, age, login, password, role, group) VALUES " +
-                "(" + name + ","
-                + age + ","
-                + login + ","
-                + password + ","
-                + role + ","
-                + group + ")";
+        String insert_employee = "insert into employees(name, age, login, password, role, group_number) VALUES " +
+                "('" + name + "',"
+                + Integer.parseInt(age) + ",'"
+                + login + "','"
+                + password + "','"
+                + role + "',"
+                + Integer.parseInt(group) + ")";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         try {
             Connection connection = DriverManager.getConnection(url, user, pass);
-            PreparedStatement statement = (PreparedStatement) connection.prepareStatement(insert_employee);
+            Statement statement =  connection.createStatement();
 
-            statement.executeUpdate();
+            statement.execute(insert_employee);
 
             ServletContext context = req.getServletContext();
             RequestDispatcher dispatcher = context.getRequestDispatcher("/insertPerson");
