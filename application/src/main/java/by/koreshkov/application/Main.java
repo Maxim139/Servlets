@@ -36,6 +36,7 @@ public class Main {
 
             while (rs.next()) {
                 Person person = new Person();
+                person.setId(rs.getInt("id"));
                 person.setAge(rs.getInt("age"));
                 person.setLogin(rs.getString("login"));
                 person.setName(rs.getString("name"));

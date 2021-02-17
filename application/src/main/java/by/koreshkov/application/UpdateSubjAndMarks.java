@@ -31,8 +31,8 @@ public class UpdateSubjAndMarks extends HttpServlet {
         String user = "postgres";
         String pass = "koreshkov";
 
-        String upMark = "UPDATE subjects SET mark ="+mark+"WHERE subject = "+subject+" AND id="+id;
-        String delete = "DELETE FROM subjects WHERE id="+id+" AND subject="+subject;
+        String upMark = "UPDATE subjects SET mark ="+mark+"WHERE subject = '"+subject+"' AND id_student="+id;
+        String delete = "DELETE FROM subjects WHERE id_student="+id+" AND subject='"+subject+"'";
 
         try {
             Class.forName("org.postgresql.Driver");
