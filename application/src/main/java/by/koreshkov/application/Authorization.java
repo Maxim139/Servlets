@@ -38,6 +38,10 @@ public class Authorization extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        HttpSession session = req.getSession();
+
+
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String role = "";
@@ -47,21 +51,21 @@ public class Authorization extends HttpServlet {
         if (Main.checkUser(login, password) || admin) {
             if (!admin) { role = Main.user(login).getRole(); }
             if (admin) {
-                HttpSession session = req.getSession();
+                //HttpSession session = req.getSession();
                 session.setAttribute("user", Main.user(login));
                 ServletContext context = req.getServletContext();
                 RequestDispatcher dispatcher = context.getRequestDispatcher("/adminStartPage");
                 dispatcher.forward(req, resp);
             }
             if (role.equals("teacher")) {
-                HttpSession session = req.getSession();
+                //HttpSession session = req.getSession();
                 session.setAttribute("user", Main.user(login));
                 ServletContext context = req.getServletContext();
                 RequestDispatcher dispatcher = context.getRequestDispatcher("/teacherStartPage");
                 dispatcher.forward(req, resp);
             }
             if (role.equals("student")) {
-                HttpSession session = req.getSession();
+                //HttpSession session = req.getSession();
                 session.setAttribute("user", Main.user(login));
                 List<Student> sub_marks = new ArrayList<>();
                 List<Student> list = Main.subjectList();

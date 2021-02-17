@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>adminStartPage</servlet-name>
-        <jsp-file>/adminStartPage.jsp</jsp-file>
+        <jsp-file>/adminPages/adminStartPage.jsp</jsp-file>
     </servlet>
 
     <servlet-mapping>
@@ -16,7 +16,7 @@
 
     <servlet>
         <servlet-name>teacherStartPage</servlet-name>
-        <jsp-file>/teacherStartPage.jsp</jsp-file>
+        <jsp-file>/teacherPages/teacherStartPage.jsp</jsp-file>
     </servlet>
 
     <servlet-mapping>
@@ -26,7 +26,7 @@
 
     <servlet>
         <servlet-name>salary</servlet-name>
-        <jsp-file>/salary.jsp</jsp-file>
+        <jsp-file>/teacherPages/salary.jsp</jsp-file>
     </servlet>
 
     <servlet-mapping>
@@ -36,7 +36,7 @@
 
     <servlet>
         <servlet-name>studentStartPage</servlet-name>
-        <jsp-file>/studentStartPage.jsp</jsp-file>
+        <jsp-file>/studentPages/studentStartPage.jsp</jsp-file>
     </servlet>
 
     <servlet-mapping>

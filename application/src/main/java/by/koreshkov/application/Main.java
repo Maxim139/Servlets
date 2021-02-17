@@ -22,6 +22,12 @@ public class Main {
         String get_employees = "select id, name, age, login, password, role from employees";
 
         try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
             Connection connection = DriverManager.getConnection(url, user, password);
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(get_employees);
@@ -53,6 +59,14 @@ public class Main {
 
         String get_subjects = "select id_student, subject, mark from subjects";
 
+
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
         try {
             Connection connection = DriverManager.getConnection(url, user, password);
             Statement statement = connection.createStatement();
@@ -81,6 +95,13 @@ public class Main {
         String password = "koreshkov";
 
         String get_salary = "select id_teacher, month, salary from salary";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
 
         try {
             Connection connection = DriverManager.getConnection(url, user, password);
