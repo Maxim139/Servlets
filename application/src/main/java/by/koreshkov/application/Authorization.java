@@ -1,6 +1,7 @@
 package by.koreshkov.application;
 
 
+import by.koreshkov.Person;
 import by.koreshkov.Student;
 
 import javax.servlet.RequestDispatcher;
@@ -20,12 +21,13 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/authorization", initParams = {
         @WebInitParam(name = "login", value = "maxim"),
-        @WebInitParam(name = "password", value = "koreshkov")
+        @WebInitParam(name = "password", value = "koreshkov"),
 })
 public class Authorization extends HttpServlet {
 
     private String adminPassword = "";
     private String adminLogin = "";
+
 
     public void init(ServletConfig config) throws ServletException  {
          super.init(config);
@@ -48,7 +50,9 @@ public class Authorization extends HttpServlet {
             if (!admin) { role = Main.user(login).getRole(); }
             if (admin) {
                 HttpSession session = req.getSession();
-                session.setAttribute("user", Main.user(login));
+                Person userAdmin = new Person();
+                userAdmin.setRole("admin");
+                session.setAttribute("user", userAdmin);
                 ServletContext context = req.getServletContext();
                 RequestDispatcher dispatcher = context.getRequestDispatcher("/adminStartPage");
                 dispatcher.forward(req, resp);

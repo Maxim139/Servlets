@@ -20,5 +20,12 @@
     Редактировать оценки студентов:
     <input type="submit">
 </form>
+
+
+<form action="sessionInvalidate" method="get">
+    <input type="submit" value="Выйти из аккаунта">
+</form>
+
+
 </body>
 </html>

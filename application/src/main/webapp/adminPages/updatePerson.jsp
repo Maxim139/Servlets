@@ -17,8 +17,7 @@
 </form>
 
 <form action="adminStartPage" method="get">
-    Выйти в главное меню:
-    <input type="submit">
+    <input type="submit" value="Главное меню">
 </form>
 
 </body>

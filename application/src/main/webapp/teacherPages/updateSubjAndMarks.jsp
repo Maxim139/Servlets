@@ -14,7 +14,7 @@
     <input type="submit">
 </form>
 
-<form action="adminStartPage" method="get">
+<form action="teacherStartPage" method="get">
     Выйти в главное меню:
     <input type="submit">
 </form>

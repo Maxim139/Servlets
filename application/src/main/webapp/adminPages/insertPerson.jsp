@@ -20,5 +20,11 @@
     <input type="submit">
 </form>
 
+<form action="adminStartPage" method="get">
+    <input type="submit" value="Главное меню">
+</form>
+
+
+
 </body>
 </html>

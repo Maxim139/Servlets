@@ -6,5 +6,11 @@
 </head>
 <body>
 <%= session.getAttribute("salary") %>
+
+<form action="teacherStartPage" method="get">
+    Выйти в главное меню:
+    <input type="submit">
+</form>
+
 </body>
 </html>

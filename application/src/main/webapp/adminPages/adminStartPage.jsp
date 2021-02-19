@@ -26,5 +26,10 @@
     <input type="submit">
 </form>
 
+<p>
+<form action="sessionInvalidate" method="get">
+    <input type="submit" value="Выйти из аккаунта">
+</form>
+</p>
 </body>
 </html>
