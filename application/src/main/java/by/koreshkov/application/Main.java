@@ -2,32 +2,41 @@ package by.koreshkov.application;
 
 import by.koreshkov.Person;
 import by.koreshkov.Student;
+import by.koreshkov.Teacher;
+
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    static List<Person> employees = new ArrayList<>();
-    static List<Student> subjects = new ArrayList<>();
-    public static void main(String[] args) {
+
+    public static List<Person> employeesList() {
+
+        List<Person> employees = new ArrayList<>();
+
         String url = "jdbc:postgresql://localhost:5432/Employees";
         String user = "postgres";
         String password = "koreshkov";
 
-
-
         String get_employees = "select id, name, age, login, password, role from employees";
-        String get_subjects = "select id_student, subject, mark from subjects";
+
+
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
 
         try {
             Connection connection = DriverManager.getConnection(url, user, password);
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(get_employees);
 
-            while(rs.next())
-            {
+            while (rs.next()) {
                 Person person = new Person();
+                person.setId(rs.getInt("id"));
                 person.setAge(rs.getInt("age"));
                 person.setLogin(rs.getString("login"));
                 person.setName(rs.getString("name"));
@@ -36,9 +45,27 @@ public class Main {
                 employees.add(person);
 
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
+        }
+        return employees;
+    }
 
+
+    public static List<Student> subjectList() {
+
+        List<Student> subjects = new ArrayList<>();
+
+        String url = "jdbc:postgresql://localhost:5432/Employees";
+        String user = "postgres";
+        String password = "koreshkov";
+
+        String get_subjects = "select id_student, subject, mark from subjects";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
         try {
@@ -46,29 +73,59 @@ public class Main {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(get_subjects);
 
-            while(rs.next())
-            {
+            while(rs.next()) {
                 Student student = new Student();
                 student.setId(rs.getInt("id_student"));
                 student.setSubject(rs.getString("subject"));
                 student.setMark(rs.getInt("mark"));
                 subjects.add(student);
-
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-
         }
-      /*  for(Person list: employees){
-            System.out.println(list);
-        }*/
-
-
+        return subjects;
     }
+
+
+    public static List<Teacher> salaryList() {
+
+        List<Teacher> salary = new ArrayList<>();
+
+        String url = "jdbc:postgresql://localhost:5432/Employees";
+        String user = "postgres";
+        String password = "koreshkov";
+
+        String get_salary = "select id_teacher, month, salary from salary";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(get_salary);
+
+            while(rs.next()) {
+                Teacher teacher = new Teacher();
+                teacher.setId(rs.getInt("id_teacher"));
+                teacher.setMonth(rs.getString("month"));
+                teacher.setSalary(rs.getInt("salary"));
+                salary.add(teacher);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return salary;
+    }
+
 
     public static boolean checkUser(String login, String password) {
         boolean reply = false;
-        for (Person user : employees) {
+        List<Person> employeesList = employeesList();
+        for (Person user : employeesList) {
             String userLogin = user.getLogin();
             String userPassword = user.getPassword();
             if (login.equals(userLogin) && password.equals(userPassword)) {
@@ -77,28 +134,20 @@ public class Main {
             }
         }
         return reply;
-
     }
 
-    public static Person user (String login){
+
+    public static Person user (String login) {
         Person user_temp = null;
-        //String userRole="undefined";
-        for (Person user : employees){
+        List<Person> employeesList = employeesList();
+        for (Person user : employeesList) {
             String userLogin = user.getLogin();
-            if (login.equals(userLogin)){
+            if (login.equals(userLogin)) {
                 user_temp = user;
-              // userRole = user.getRole();
-               break;
+                break;
             }
         }
         return user_temp;
-        //return userRole;
     }
-
-    public static List<Student> subjectList(){
-        return subjects;
-    }
-
-
 }
 

@@ -2,19 +2,11 @@
 <web-app version="2.4"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-<servlet>
-<servlet-name>Info</servlet-name>
-    <jsp-file>/Info.jsp</jsp-file>
-</servlet>
 
-    <servlet-mapping>
-        <servlet-name>Info</servlet-name>
-        <url-pattern>/info</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>adminStartPage</servlet-name>
-        <jsp-file>/adminStartPage.jsp</jsp-file>
+        <jsp-file>/adminPages/adminStartPage.jsp</jsp-file>
     </servlet>
 
     <servlet-mapping>
@@ -22,9 +14,10 @@
         <url-pattern>/adminStartPage</url-pattern>
     </servlet-mapping>
 
+
     <servlet>
         <servlet-name>teacherStartPage</servlet-name>
-        <jsp-file>/teacherStartPage.jsp</jsp-file>
+        <jsp-file>/teacherPages/teacherStartPage.jsp</jsp-file>
     </servlet>
 
     <servlet-mapping>
@@ -32,9 +25,21 @@
         <url-pattern>/teacherStartPage</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>salary</servlet-name>
+        <jsp-file>/teacherPages/salary.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>salary</servlet-name>
+        <url-pattern>/salaryJSP</url-pattern>
+    </servlet-mapping>
+
+
     <servlet>
         <servlet-name>studentStartPage</servlet-name>
-        <jsp-file>/studentStartPage.jsp</jsp-file>
+        <jsp-file>/studentPages/studentStartPage.jsp</jsp-file>
     </servlet>
 
     <servlet-mapping>
@@ -42,9 +47,100 @@
         <url-pattern>/studentStartPage</url-pattern>
     </servlet-mapping>
 
+
     <servlet>
-        <display-name>Init</display-name>
-        <servlet-name>Init</servlet-name>
+        <servlet-name>insertPerson</servlet-name>
+        <jsp-file>/adminPages/insertPerson.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>insertPerson</servlet-name>
+        <url-pattern>/insertPerson</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>insertSubjAndMarks</servlet-name>
+        <jsp-file>/teacherPages/insertSubjAndMarks.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>insertSubjAndMarks</servlet-name>
+        <url-pattern>/insertSubjAndMarksJSP</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>insertSalary</servlet-name>
+        <jsp-file>/adminPages/insertSalary.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>insertSalary</servlet-name>
+        <url-pattern>/insertSalaryJSP</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>updatePerson</servlet-name>
+        <jsp-file>/adminPages/updatePerson.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>updatePerson</servlet-name>
+        <url-pattern>/updatePersonJSP</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>updateSalary</servlet-name>
+        <jsp-file>/adminPages/updateSalary.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>updateSalary</servlet-name>
+        <url-pattern>/updateSalaryJSP</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>updateSubjAndMarks</servlet-name>
+        <jsp-file>/teacherPages/updateSubjAndMarks.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>updateSubjAndMarks</servlet-name>
+        <url-pattern>/updateSubjAndMarksJSP</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>error</servlet-name>
+        <jsp-file>/error.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>error</servlet-name>
+        <url-pattern>/error</url-pattern>
+    </servlet-mapping>
+
+
+    <!--
+    <context-param>
+        <init-param>
+            <param-name>login</param-name>
+            <param-value>maxim</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>koreshkov</param-value>
+        </init-param>
+    </context-param>
+-->
+<!--
+    <servlet>
+        <servlet-name>Authorization</servlet-name>
+        <servlet-class>Authorization</servlet-class>
         <init-param>
             <param-name>name</param-name>
             <param-value>Maxim</param-value>
@@ -55,15 +151,13 @@
         </init-param>
         <init-param>
             <param-name>login</param-name>
-            <param-value>koreshkov</param-value>
-        </init-param>
-        <init-param>
-            <param-name>password</param-name>
             <param-value>maxim</param-value>
         </init-param>
         <init-param>
-            <param-name>role</param-name>
-            <param-value>admin</param-value>
+            <param-name>password</param-name>
+            <param-value>koreshkov</param-value>
         </init-param>
     </servlet>
+-->
+
 </web-app>

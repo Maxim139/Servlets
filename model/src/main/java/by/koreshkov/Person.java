@@ -3,11 +3,10 @@ package by.koreshkov;
 import java.util.Objects;
 
 public class Person {
-    private String name;
-    private int age, id, group_number;
-    private String login, role;
-    private String password;
-
+    private  String name;
+    private  int age, id, group_number;
+    private  String login, role;
+    private  String password;
 
 
 

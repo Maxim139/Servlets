@@ -1,49 +1,31 @@
 package by.koreshkov;
 
-public class Teacher {
+public class Teacher extends Person{
 
-    String name;
-    int age, groupId;
-    private String login, password, role;
+    private String month;
+    private int salary;
 
-    public Teacher(String name, int age,int groupId) {
-        this.name = name;
-        this.age = age;
-
-        this.groupId = groupId;
+    public String getMonth() {
+        return month;
     }
 
-    public String getLogin() {
-        return login;
+    public void setMonth(String month) {
+        this.month = month;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public int getSalary() {
+        return salary;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     @Override
     public String toString() {
         return "Teacher{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", groupId=" + groupId +
-
+                "month='" + month + '\'' +
+                ", salary=" + salary +
                 '}';
     }
 }
